@@ -55,30 +55,28 @@ func main () {
 	}
 	fmt.Printf("How many items of %s you want?\n", Items[id-1].Name)
 	fmt.Scanf("%d", &qty)
-	CalculatePrice(id, qty)
-
+	price := CalculatePrice(id, qty)
+	fmt.Printf("Total Price: %0.2f\n", price)
 }
 
-func CalculatePrice(id, qty int) {
+func CalculatePrice(id, qty int) float32 {
 	var totalPrice float32
-	if id == 1 {
-		totalPrice = totalPrice + Items[id-1].Price * float32(qty)
-	} else if id == 2 {
+	if id == 2 { //MacBook Pro
 		var div int = qty / 3
 		var rem int = qty % 3
 
 		totalPrice += Items[id-1].Price * float32(div) * 2
 		totalPrice += Items[id-1].Price * float32(rem)
-	} else if id == 3 {
+	} else if id == 3 { //Alexa Speaker
 		totalPrice = totalPrice + Items[id-1].Price * float32(qty)
 		if qty > 3 {
 			totalPrice -= (0.1) * totalPrice
 		}
-	} else if id == 4 {
+	} else {
 		totalPrice = totalPrice + Items[id-1].Price * float32(qty)
 	}
 
-	fmt.Printf("Total Price: %0.2f\n", totalPrice)
+	return totalPrice
 }
 
 func PrintDetails() {
